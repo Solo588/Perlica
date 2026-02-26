@@ -1,0 +1,29 @@
+you fucking retard:
+
+Serve ollama:       ollama Serve
+List Ollama:        ollama List
+
+        p.s.: 'ollama serve' opens a port for ollama server.
+                it listense for json file which will determine it's model.
+
+activate venv: venv\Scripts\activate
+
+
+How to run ts w requirements:
+        do: 
+                python -m venv venv
+                venv\Scripts\activate
+                pip install -r requirements.txt
+
+How to use github:
+        
+        git add "file"
+                example: 
+                        'git add .' include everything in folder into commit
+                        'git add main.py' include only main.py into the commit
+        
+        git commit: save a snapshot of the files you've selected with 'git add'
+
+        git push: push all git commits
+
+        
