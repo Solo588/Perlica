@@ -1,0 +1,29 @@
+Current page: actions.fastCMD
+
+Brief:
+
+    Currently making watch_telegram solely just watch and filter.
+
+    It will then send to SRouter, which will determine whether it's 
+    a hardcoded command, or for LLM.
+
+    Right now, I am programming for hardcoded commands and currently 
+    working in fastCMD.
+
+    There will be a send_telegram action which will handle the
+    replies and sending texts so it's just a simple function everytime.
+    
+
+Current working flowchart:
+
+w_telegram --> SRouter --> fastCMD --> actions(e.g.s_telegram)
+                |                         ^
+                --> LLM ------------------|
+
+
+LONG TERM TASK:
+    - Finish level 1 of perlica
+
+
+Upcoming tasks:
+    - make watch_telegram asyncio or sum idk. figure it out. it's stuck in loop

@@ -117,7 +117,11 @@ async def on_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         print(event)
         return
     
-    if user_id == ADMIN_ID and message.text:
+    textLowerSplit = text.lower().split()
+    cmd_list = ["commands", "status", "public", "private", "kill", "menti", "spam"]
+    result = any(word in cmd_list for word in textLowerSplit)
+
+    if user_id == ADMIN_ID and message.text and result:
         if text.lower() == "commands":
             await message.reply_text(
                 "status - check public status\n"
@@ -182,8 +186,7 @@ async def on_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await message.reply_text("too many times")
                 return
             
-            run_spam(code, times, word)
-
+            await run_spam(code, times, word)
             return
 
     #Temporary: Health and kill
