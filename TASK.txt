@@ -19,8 +19,8 @@ Brief:
 Current working flowchart:
 
 w_telegram --> SRouter --> fastCMD --> actions(e.g.s_telegram)
-                |                         ^
-                --> LLM ------------------|
+                |                             ^
+                -> available actions --> LLM -|
 
 
 LONG TERM TASK:
@@ -31,13 +31,18 @@ Notes:
     - In send telegram, there will be 2 bots. console and main.
 
 
+Prioirity task:
+    [-] isolate all actions in fastCMD so bot can access them in future
+
 Small tasks:
     [v] create send telegram action
     [-] finish router [missing LLM]
     [v] finish fastCMD
-    [-] isolate all actions in fastCMD so bot can access them in future
-
+    [-] write all txt file in core
+    
     [-] w_telegram return and listen using asyncio
+
+    [-] LLM.py still need to hook up everything.
 
 
 Upcoming tasks:

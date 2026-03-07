@@ -7,6 +7,7 @@ import os
 load_dotenv()
 
 import state
+import LLM
 
 from actions.fastCMD import cmd as Fcmd
 
@@ -18,10 +19,6 @@ WLList = state.wlList
 
 # This will have to be editable through perlica_console or by bot later.
 WhiteListUsers = [ADMIN_ID]
-
-
-def route(cmd, param1, param2):
-    print()
 
 def check_identity(id):
     global WhiteListStatus
@@ -41,7 +38,7 @@ def Rcmd(text):
     Fcmd(text)
 
 def ROUTE_workflow(event):
-    id = event["user_id"]
+    check_identity(event["user_id"])
     textLowerSplit = event["text"].lower().split()
     result = any(word in cmd_list for word in textLowerSplit)
 
@@ -49,10 +46,7 @@ def ROUTE_workflow(event):
         Rcmd(event["text"])
 
     else:
-        '''
-        Link to LLM:
-            - 
-        '''
+        LLM.LLM(event["text"], )
 
 def LLM_ROUTE():
     '''
