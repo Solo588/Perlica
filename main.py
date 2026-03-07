@@ -1,5 +1,5 @@
 '''
-APP - runs the overall workflow
+main - runs the overall workflow
 '''
 
 from watch_telegram import main as w_telegram

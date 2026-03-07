@@ -51,6 +51,7 @@ from actions.spam_mentimeter import run_spam
 from telegram import Update
 from telegram.ext import Application, MessageHandler, ContextTypes, filters
 from telegram.error import TelegramError, NetworkError, TimedOut
+import state
 
 
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
@@ -58,7 +59,7 @@ ADMIN_ID = int(os.getenv("ADMIN_ID"))
 platform = "telegram"
 user_id = ""
 
-public = False
+public = state.public
 
 START_TIME = time.time() #temporary
 

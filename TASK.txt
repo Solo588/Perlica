@@ -1,4 +1,4 @@
-Current page: actions.fastCMD
+Current page: Router
 
 Brief:
 
@@ -7,12 +7,14 @@ Brief:
     It will then send to SRouter, which will determine whether it's 
     a hardcoded command, or for LLM.
 
-    Right now, I am programming for hardcoded commands and currently 
-    working in fastCMD.
+    Hardcoded commands are finished, haven't ran it yet, everything isn't linked up yet.
 
-    There will be a send_telegram action which will handle the
-    replies and sending texts so it's just a simple function everytime.
-    
+    Need to link LLM to router somehow and let LLM be able to call actions through it. 
+    Right now there will be simple gateways, just whitelist, admin, unknown and blacklist.
+    This will be run in private for now. so all actions are accessible.
+
+    TO link up the LLM, i need to take ideas from MarkX, with intents and function callings.
+
 
 Current working flowchart:
 
@@ -23,6 +25,19 @@ w_telegram --> SRouter --> fastCMD --> actions(e.g.s_telegram)
 
 LONG TERM TASK:
     - Finish level 1 of perlica
+
+
+Notes:
+    - In send telegram, there will be 2 bots. console and main.
+
+
+Small tasks:
+    [v] create send telegram action
+    [-] finish router [missing LLM]
+    [v] finish fastCMD
+    [-] isolate all actions in fastCMD so bot can access them in future
+
+    [-] w_telegram return and listen using asyncio
 
 
 Upcoming tasks:
