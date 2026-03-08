@@ -5,8 +5,8 @@ main - runs the overall workflow
 from watch_telegram import main as w_telegram
 from SRouter import ROUTE_workflow as ROUTE
 
-def workflow():
-    event = await.w_telegram()
+async def workflow():
+    event = await event_queue.get()
     ROUTE(event)
 
 

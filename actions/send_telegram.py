@@ -24,9 +24,11 @@ async def console(id, text):
         chat_id=id,
         text=text
     )
+    return
 
 async def Message(id, text):
     await main_bot.send_message(
         chat_id=id,
         text=text
     )
+    return

@@ -32,17 +32,21 @@ Notes:
 
 
 Prioirity task:
-    [-] isolate all actions in fastCMD so bot can access them in future
+    [-] move out health
+    [-] finish redesigning w_telegram
+    
+    [-] connect id to actions etc. basically an object carrying id around so it knows what it's doing 
+
 
 Small tasks:
     [v] create send telegram action
     [-] finish router [missing LLM]
     [v] finish fastCMD
-    [-] write all txt file in core
-    
-    [-] w_telegram return and listen using asyncio
+    [v] write all txt file in core
 
     [-] LLM.py still need to hook up everything.
+    [-] actually run mentimeter spam bot
+    [-] explore queuing
 
 
 Upcoming tasks:
