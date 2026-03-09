@@ -7,7 +7,7 @@ import os
 load_dotenv()
 
 import state
-import LLM
+from LLM import LLM
 
 from actions.fastCMD import cmd as Fcmd
 
@@ -34,22 +34,25 @@ def check_identity(id):
         return WhiteListStatus
         
 
-def Rcmd(text):
-    Fcmd(text)
+def Rcmd(text,cid):
+    Fcmd(text,cid)
+    return
 
-def ROUTE_workflow(event):
+def ROUTE_workflow(event,context):
     check_identity(event["user_id"])
     textLowerSplit = event["text"].lower().split()
     result = any(word in cmd_list for word in textLowerSplit)
 
+    cid = event["chat_id"]
+
     if Admin and result:
-        Rcmd(event["text"])
+        Rcmd(event["text"],cid)
 
     else:
-        LLM.LLM(event["text"], )
+        LLM(event["text"], WhiteListStatus, cid)
+    return
 
 def LLM_ROUTE():
     '''
-    LLM output:
-        - 
+    route LLM's action
     '''

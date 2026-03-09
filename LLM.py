@@ -11,6 +11,8 @@ LLM input:
 
 '''
 
+from ollama import chat
+
 
 # first create action txt for diff whitelists
 def actionFile(wl):
@@ -25,7 +27,9 @@ def load_txt(path):
     with open(path, "r", encoding="utf-8") as f:
         return f.read()
 
-def LLM(prompt, wl):
+
+# main
+def LLM(prompt, wl, cid):
     action_path = actionFile(wl)
 
     base_prompt = load_txt("core/perlica.md")
@@ -38,6 +42,17 @@ def LLM(prompt, wl):
         + actions
         + "\n\n"
         + format_rules
-        + "\n\nUser: "
+        + f"chatid: {cid}"
+        + "\n\nUserText: "
         + prompt
     )
+
+    response = chat(
+        model="qwen2.5:7b",   # change to your model name
+        messages=[
+            {"role": "user", "content": final_prompt}
+        ]
+    )
+
+    output = response["message"]["content"]
+    return output

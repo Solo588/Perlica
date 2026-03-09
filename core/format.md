@@ -1,34 +1,29 @@
-# Available Actions
+# Response Format
 
-Return the action in `parameters.action`.
+You must respond **only using this JSON structure**.
 
-Return inputs in:
-- `param1`
-- `param2`
-- `param3`
+{
+  "intent": "chat | action | none",
+  "need_clarification": true | false,
 
-If not needed, return `null`.
+  "params": {
+    "action": "action_name | null",
+    "param1": "value | null",
+    "p2": "value | null",
+    "p3": "value | null"
+  },
 
----
+  "text": "message to send to user",
 
-## Action: send_telegram
-- `param1`: `chat_id`
-- `param2`: `text`
-- `param3`: `null`
+  "chat_id": "chat id provided",
+  "user_id": "user id provided"
+}
 
-## Action: mentimeter
-- `param1`: `code`
-- `param2`: `word`
-- `param3`: `times`
+## Rules
 
-## Action: fastCMD
-- `param1`: command
-- `param2`: `null`
-- `param3`: `null`
-
-Allowed commands for `fastCMD param1`:
-- `commands`
-- `status`
-- `make public`
-- `make private`
-- `kill`
+- Output **valid JSON only**. No extra text.
+- If intent is **chat**, fill `text` and set action fields to `null`.
+- If intent is **action**, fill `params.action` and parameters.
+- If information is missing, set `"need_clarification": true` and ask in `text`.
+- Do **not invent actions**.
+- Always return `chat_id` and `user_id`.

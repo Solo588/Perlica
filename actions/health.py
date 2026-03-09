@@ -11,7 +11,7 @@ import asyncio
 
 START_TIME = time.time()
 
-async def get_health():
+async def get_health(cid):
     uptime = int(time.time() - START_TIME)
     proc = psutil.Process(os.getpid())
 
@@ -26,6 +26,6 @@ async def get_health():
         f"- pid: {os.getpid()}\n"
     )
 
-    await send_telegram.Message(id, send)
+    await send_telegram.Message(cid, send)
 
     return 
