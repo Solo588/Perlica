@@ -38,6 +38,8 @@ async def watch_telegram():
         global last_chat_id
         if not state.online:
             return
+        
+        print("\ndetected new message\n")
 
         message = update.effective_message
         user = update.effective_user
@@ -57,17 +59,20 @@ async def watch_telegram():
             "text": message.text
         }
 
+        print("created event")
+
         await event_queue.put(event)
 
     app = Application.builder().token(BOT_TOKEN).build()
     app.add_handler(MessageHandler(~filters.COMMAND, on_message))
+    print("on_message registered")
 
     try:
         await app.initialize()
         await app.start()
-        await app.run_polling()
+        await app.updater.start_polling()
 
-        sTele.console(AdminID,"Telegram listening...")
+        await sTele.console(AdminID,"Telegram listening...")
         print("Telegram listening...")
 
         while state.online:
@@ -80,8 +85,8 @@ async def watch_telegram():
         return None
 
     finally:
-        sTele.console(AdminID,"Stopping telegram polling...")
-        print("Telegram polling")
+        await sTele.console(AdminID,"Stopping telegram polling...")
+        print("stop Telegram polling")
         if app.updater and app.updater.running:
             await app.updater.stop()
         await app.stop()

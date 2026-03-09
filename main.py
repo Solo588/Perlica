@@ -12,14 +12,17 @@ from SRouter import ROUTE_workflow as ROUTE
 
 async def workflow():
     while state.online:
+        print("\nnew loop\n")
         event = await event_queue.get()
-        ROUTE(event)
+        print("\nget queued event\n")
+        await ROUTE(event)
 
 
 
 
-def main():
-    asyncio.run(workflow())
+async def main():
+    asyncio.create_task(w_telegram())
+    await workflow()
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
