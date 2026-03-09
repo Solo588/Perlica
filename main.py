@@ -5,11 +5,13 @@ main - runs the overall workflow
 from watch_telegram import event_queue
 import asyncio
 
-from watch_telegram import main as w_telegram
+import state
+
+from watch_telegram import watch_telegram as w_telegram
 from SRouter import ROUTE_workflow as ROUTE
 
 async def workflow():
-    while True:
+    while state.online:
         event = await event_queue.get()
         ROUTE(event)
 

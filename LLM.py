@@ -16,6 +16,8 @@ LLM output:
 '''
 
 from ollama import chat
+import json
+import actions.send_telegram as sTele
 
 
 # first create action txt for diff whitelists
@@ -48,16 +50,22 @@ def LLM(prompt, wl, cid):
         + format_rules
         + "\n\n"
         + f"chatid: {cid}"
-        + "\n\nUserText: "
-        + prompt
     )
 
     response = chat(
         model="qwen2.5:7b",   # change to your model name
         messages=[
-            {"role": "user", "content": final_prompt}
+            {"role": "system", "content": final_prompt},
+            {"role": "system", "content": f"user: {prompt}"}
         ]
     )
 
     output = response["message"]["content"]
-    return output
+
+    try:
+        data = json.loads(output)
+        return output
+    except:
+        print(f"error: LLM produced invalid format\noutput: {output}") 
+        return sTele.console(cid,f"error: LLM produced invalid format\noutput: {output}")
+    

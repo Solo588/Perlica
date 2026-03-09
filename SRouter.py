@@ -52,4 +52,4 @@ def ROUTE_workflow(event,context):
     return
 
 def LLM_ROUTE(output):
-    print(f"\n\noutput\n\n")
+    print(f"\n\n{output}\n\n")

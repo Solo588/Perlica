@@ -6,12 +6,12 @@
 
 import state
 
-from send_telegram import Message as Msend
-from send_telegram import console as console
+from actions.send_telegram import Message as Msend
+from actions.send_telegram import console as console
 from telegram.ext import Application, MessageHandler, ContextTypes, filters
 import watch_telegram as w_telegram
 
-import health
+import actions.health as health
 
 send = ""
 public = state.public
@@ -60,4 +60,6 @@ async def cmd(text, cid):
         state.online = False
         Csend = "Perlica shutted down."
         print ("Perlica shutted down.")
-        return Msend(cid, send), console(cid, Csend)
+        await Msend(cid, send)
+        await console(cid, Csend)
+        return 

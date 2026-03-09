@@ -6,7 +6,7 @@
 import time 
 import psutil
 import os
-import send_telegram
+import actions.send_telegram as send_telegram
 import asyncio
 
 START_TIME = time.time()

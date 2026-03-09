@@ -21,22 +21,28 @@ import state
 load_dotenv()
 
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+AdminID = os.getenv("ADMIN_ID")
 PLATFORM = "telegram"
 
+last_chat_id = 0
+
+event_queue = asyncio.Queue()
 
 async def watch_telegram():
     """
     Waits for one telegram message and returns it as an event.
     Stops cleanly if state.online becomes False.
     """
-    event_queue = asyncio.Queue()
 
     async def on_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+        global last_chat_id
         if not state.online:
             return
 
         message = update.effective_message
         user = update.effective_user
+        
+        last_chat_id = message.chat.id
 
         if message is None or user is None:
             return
@@ -59,9 +65,10 @@ async def watch_telegram():
     try:
         await app.initialize()
         await app.start()
-        await app.updater.start_polling()
+        await app.run_polling()
 
-        sTele(on_message.user.id,"Telegram listening...")
+        sTele.console(AdminID,"Telegram listening...")
+        print("Telegram listening...")
 
         while state.online:
             try:
@@ -73,7 +80,8 @@ async def watch_telegram():
         return None
 
     finally:
-        sTele(on_message.user.id,"Stopping telegram polling...")
+        sTele.console(AdminID,"Stopping telegram polling...")
+        print("Telegram polling")
         if app.updater and app.updater.running:
             await app.updater.stop()
         await app.stop()
