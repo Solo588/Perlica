@@ -5,10 +5,14 @@ LLM to determine intent, run actions, or chat
     3. Route to action
 
 LLM input:
-    [perlica.txt]
-    [action.txt]
+    [perlica.md]
+    [action.md]
+    [format.md]
+    [chat id]
     [user prompt]
 
+LLM output:
+    work for router??
 '''
 
 from ollama import chat
@@ -32,16 +36,17 @@ def load_txt(path):
 def LLM(prompt, wl, cid):
     action_path = actionFile(wl)
 
-    base_prompt = load_txt("core/perlica.md")
+    perlica = load_txt("core/perlica.md")
     actions = load_txt(action_path)
     format_rules = load_txt("core/format.md")
 
     final_prompt = (
-        base_prompt
+        perlica
         + "\n\n"
         + actions
         + "\n\n"
         + format_rules
+        + "\n\n"
         + f"chatid: {cid}"
         + "\n\nUserText: "
         + prompt

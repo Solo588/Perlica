@@ -1,7 +1,7 @@
 you fucking retard:
 
-Serve ollama:       ollama Serve
-List Ollama:        ollama List
+Serve ollama:       ollama serve
+List Ollama:        ollama list
 
         p.s.: 'ollama serve' opens a port for ollama server.
                 it listense for json file which will determine it's model.

@@ -25,13 +25,12 @@ def check_identity(id):
     global Admin
 
     if id == ADMIN_ID:
-        WhiteListStatus = "Admin"
-        Admin = True
-        return WhiteListStatus
+        return "Admin"
     
     elif id in WLList:
-        WhiteListStatus = "whiteList"
-        return WhiteListStatus
+        return "whiteList"
+    
+    return None
         
 
 def Rcmd(text,cid):
@@ -39,20 +38,18 @@ def Rcmd(text,cid):
     return
 
 def ROUTE_workflow(event,context):
-    check_identity(event["user_id"])
+    wl_status = check_identity(event["user_id"])
     textLowerSplit = event["text"].lower().split()
     result = any(word in cmd_list for word in textLowerSplit)
 
     cid = event["chat_id"]
 
-    if Admin and result:
-        Rcmd(event["text"],cid)
+    if wl_status == "Admin":
+        Rcmd(event["text"], cid)
 
-    else:
-        LLM(event["text"], WhiteListStatus, cid)
+    elif wl_status == "whiteList":
+        LLM_ROUTE(LLM(event["text"], wl_status, cid))
     return
 
-def LLM_ROUTE():
-    '''
-    route LLM's action
-    '''
+def LLM_ROUTE(output):
+    print(f"\n\noutput\n\n")
