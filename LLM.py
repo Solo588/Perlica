@@ -19,7 +19,6 @@ from ollama import chat
 import json
 import actions.send_telegram as sTele
 
-
 # first create action txt for diff whitelists
 def actionFile(wl):
     match wl:
@@ -35,7 +34,7 @@ def load_txt(path):
 
 
 # main
-def LLM(prompt, wl, cid):
+async def LLM(prompt, wl, cid):
     action_path = actionFile(wl)
 
     perlica = load_txt("core/perlica.md")
@@ -64,8 +63,13 @@ def LLM(prompt, wl, cid):
 
     try:
         data = json.loads(output)
+
+        text = data["text"]
+
+        await sTele.Message(cid,text)
+
         return output
     except:
-        print(f"error: LLM produced invalid format\noutput: {output}") 
-        return sTele.console(cid,f"error: LLM produced invalid format\noutput: {output}")
+        print(f"error: LLM produced invalid format\noutput: \n{output}") 
+        return await sTele.console(cid,f"error: LLM produced invalid format\noutput: {output}")
     

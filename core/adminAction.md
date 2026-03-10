@@ -13,9 +13,9 @@ If **requirements** aren't met, **clarifications** set to **true**
 
 ## Action: mentimeter
 **requirements:** code, word, times
-- `param1`: {code}
-- `param2`: {word}
-- `param3`: {times}
+- `param1`: `code`
+- `param2`: `word`
+- `param3`: `times`
 
 ## Action: fastCMD commands
 - `param1`: `command`
@@ -23,8 +23,9 @@ If **requirements** aren't met, **clarifications** set to **true**
 - `param3`: `null`
 
 Allowed commands for `fastCMD param1`:
-- `commands`
-- `status`
-- `make public`
-- `make private`
-- `kill`
+- `health` -> check self health
+- `commands` -> show user commands
+- `status` -> show user self public status
+- `make public` -> make self status public
+- `make private` -> make self status private
+- `kill` -> kill bot

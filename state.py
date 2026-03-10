@@ -5,5 +5,5 @@
 
 online = True
 public = False
-cmdList = ["commands", "status", "public", "private", "kill", "menti", "spam", "health"]
+cmdList = ["commands", "status", "public", "private", "kill", "menti", "health"]
 wlList = ["Admin", "whiteList", "unknown", "blackList"]

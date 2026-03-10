@@ -4,6 +4,8 @@
     Can be accessed by bot by writing the text. but usually these are for human prompters.
 '''
 
+
+
 import state
 
 from actions.send_telegram import Message as Msend
@@ -30,14 +32,19 @@ async def cmd(text, cid):
             "kill - turn off\n"
             "menti spam (code), (times)" 
         )
-        return Msend(cid, send)
+        
+        await Msend(cid, send)
+
+        return 
     
     elif text.lower() == "health":
         await health.get_health(cid)
+        return
 
     elif text.lower() == "status":
         send = f"Public: {public}"
-        return Msend(cid, send)
+        await Msend(cid, send)
+        return
 
     elif text.lower() == "make public":
         if public:
@@ -45,7 +52,9 @@ async def cmd(text, cid):
         else: 
             state.public = True
             send = "Perlica made public"
-        return Msend(cid, send)
+        
+        await Msend(cid, send)
+        return 
 
     elif text.lower() == "make private":
         if not public:
@@ -53,7 +62,8 @@ async def cmd(text, cid):
         else:  
             state.public = False
             send = "Perlica made private"
-        return Msend(cid, send)
+        await Msend(cid, send)
+        return 
 
     elif text.lower() == "kill":
         send = ("perlica shutting down.")

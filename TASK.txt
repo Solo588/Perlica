@@ -32,9 +32,7 @@ Notes:
 
 
 Prioirity task:
-    [-] add print() on every step to understand what's going on!!!! :))))))) fucking helll
-    [-] try out the bot. It should output the json file it outputs
-
+    [-] link it up with online api. make new project for fishing new api from: https://modelscope.ai/models
 
     [-] actually run mentimeter spam bot
     [-] add one more intent, "CheckList" for daily checklist for emails, etc.
@@ -57,6 +55,9 @@ Finished Tasks:
     [v] LLM.py still need to hook up everything.
     
     [v] explore queuing
+
+    [v] add print() on every step to understand what's going on!!!! :))))))) fucking helll
+    [v] try out the bot. It should output the json file it outputs
 
 Upcoming tasks:
     - make watch_telegram asyncio or sum idk. figure it out. it's stuck in loop

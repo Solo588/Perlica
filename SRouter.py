@@ -30,17 +30,17 @@ def check_identity(id):
     elif id in WLList:
         return "whiteList"
     
-    return None
+    return
         
 
-def Rcmd(text,cid):
-    Fcmd(text,cid)
+async def Rcmd(text,cid):
+    await Fcmd(text,cid)
     return
 
 async def ROUTE_workflow(event):
     wl_status = check_identity(event["user_id"])
     textLowerSplit = event["text"].lower().split()
-    result = any(word in cmd_list for word in textLowerSplit)
+    result = textLowerSplit[0] in cmd_list
 
     cid = event["chat_id"]
 
@@ -50,7 +50,7 @@ async def ROUTE_workflow(event):
 
     elif wl_status == "whiteList" or wl_status == "Admin":
         print("routed to LLM")
-        LLM_ROUTE(LLM(event["text"], wl_status, cid))
+        LLM_ROUTE(await LLM(event["text"], wl_status, cid))
     return
 
 def LLM_ROUTE(output):
